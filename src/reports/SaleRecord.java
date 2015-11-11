@@ -79,6 +79,10 @@ public class SaleRecord {
 		this.idClient = idClient;
 	}
 
+	public void setIdRecord(long idRecord) {
+		this.idRecord = idRecord;
+	}
+
 	public void printRecord() {
 		System.out.print(DataUtl.txtData(this.data) + "; ");
 		System.out.print(this.client + "; ");

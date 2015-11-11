@@ -1,7 +1,8 @@
 package shop;
 
 import goods.Goods;
-import utl.Bag;
+
+import java.util.ArrayList;
 
 public class Client {
 
@@ -12,7 +13,7 @@ public class Client {
 	private String address;
 	private long idClient;
 
-	private Bag<Goods> purchases;
+	private ArrayList<Goods> purchases;
 
 	public Client() {
 
@@ -20,8 +21,7 @@ public class Client {
 
 	public Client(String name) {
 		this.name = name;
-		purchases = new Bag();
-		idClient = System.currentTimeMillis();
+		purchases = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -32,7 +32,7 @@ public class Client {
 		this.name = name;
 	}
 
-	public Bag getPurchases() {
+	public ArrayList getPurchases() {
 		return purchases;
 	}
 
@@ -72,6 +72,10 @@ public class Client {
 		return idClient;
 	}
 
+	public void setIdClient(long idClient) {
+		this.idClient = idClient;
+	}
+
 	public void buyGoods(Goods gd) {
 		purchases.add(gd);
 		System.out.println(this.name + " has " + gd.getNumber() + " " + gd.getName());
@@ -82,7 +86,7 @@ public class Client {
 			return;
 		}
 		System.out.println(this.name + "'s goods are:");
-		for (Goods gd : purchases.getList()) {
+		for (Goods gd : purchases) {
 			if (gd != null) {
 				System.out.print(gd.getName() +"; ");
 				System.out.print("Quantity is " + gd.getNumber() +"; ");

@@ -11,7 +11,6 @@ public class Category extends Entry {
 
     public Category(String data) {
         this.name = data;
-        this.id = System.currentTimeMillis();
         subcategories = new ArrayList<>();
     }
 
@@ -41,4 +40,19 @@ public class Category extends Entry {
         }
     }
 
+    public void addSubcategory(Entry e) {
+        subcategories.add(e);
+    }
+
+
+    public Entry getSubcategory(String subcategory) {
+        Entry result = null;
+        for(Entry e : subcategories) {
+            if(e.getName().equals(subcategory)) {
+                result = e;
+                break;
+            }
+        }
+        return result;
+    }
 }

@@ -11,7 +11,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 public class SellingPanel  extends JPanel {
     private Shop shop;
@@ -59,7 +58,7 @@ public class SellingPanel  extends JPanel {
                 new Insets(0, 0, 0, 0), 0, 0));
 
         JLabel lCategory = new JLabel("Categories:");
-        modelComboBoxCateg = new DefaultComboBoxModel(shop.getCategory());
+        modelComboBoxCateg = new DefaultComboBoxModel(shop.getCategoriesFromGoods());
         comboCg = new JComboBox(modelComboBoxCateg);
         comboCg.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
         comboCg.addActionListener(new ActionListener() {
@@ -69,7 +68,7 @@ public class SellingPanel  extends JPanel {
                 categorySelec = (String) cb.getSelectedItem();
                 if (modelCBSubCateg != null && modelCBG != null) {
                     modelCBSubCateg.removeAllElements();
-                    for (String str : shop.getSubCategory(categorySelec)) {
+                    for (String str : shop.getSubCategoriesFromGoods(categorySelec)) {
                         modelCBSubCateg.addElement(str);
                     }
                     modelCBG.removeAllElements();
@@ -94,7 +93,7 @@ public class SellingPanel  extends JPanel {
 
         JLabel lSubCateg = new JLabel("Subcategories:");
         String subcategorySelec = "";
-        modelCBSubCateg = new DefaultComboBoxModel(shop.getSubCategory(categorySelec));
+        modelCBSubCateg = new DefaultComboBoxModel(shop.getSubCategoriesFromGoods(categorySelec));
         JComboBox comboSC = new JComboBox(modelCBSubCateg);
         comboSC.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
         comboSC.addActionListener(new ActionListener() {
@@ -174,7 +173,7 @@ public class SellingPanel  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(numberGoods <= 0) {
-                    JOptionPane.showMessageDialog(shopUI.getF(), "You mus set non-zero number of goods");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set non-zero number of goods");
                 } else {
                     shop.buyGoods(clientSelectRefer, goodsSelectRefer, numberGoods);
                     shopUI.showData();
@@ -207,7 +206,7 @@ public class SellingPanel  extends JPanel {
     private void updateComboBoxCateg() {
         if(modelComboBoxCateg != null) {
             modelComboBoxCateg.removeAllElements();
-            for (String str : shop.getCategory()) {
+            for (String str : shop.getCategoriesFromGoods()) {
                 modelComboBoxCateg.addElement(str);
             }
             if (modelComboBoxCateg.getSize() > 0) {
@@ -219,7 +218,7 @@ public class SellingPanel  extends JPanel {
     private void updateComboBoxSubcateg() {
         if(modelCBSubCateg != null) {
             modelCBSubCateg.removeAllElements();
-            for (String str : shop.getSubCategory(categorySelec)) {
+            for (String str : shop.getSubCategoriesFromGoods(categorySelec)) {
                 modelCBSubCateg.addElement(str);
             }
             if (modelCBSubCateg.getSize() > 0) {

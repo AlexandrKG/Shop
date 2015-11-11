@@ -118,14 +118,15 @@ public class ClientAddPanel  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(lClient.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(shopUI.getF(), "You mus set new Client");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set new Client");
                 } else {
                     Client cl = new Client(lClient.getText());
                     cl.setAge(age);
                     cl.setAddress(lAddress.getText());
                     cl.setTelephone(lTelephone.getText());
                     cl.setGender(selectGender);
-                    shop.getClients().add(cl);
+                    cl.setIdClient(System.nanoTime());
+                    shop.addNewClient(cl);
                     shopUI.showClientsForm();
                 }
             }

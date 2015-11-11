@@ -1,245 +1,36 @@
 package shop;
 
-import goods.*;
+
+import goods.Category;
+import goods.Goods;
 import reports.AccountBook;
-import reports.SaleRecord;
 import ui.Item;
-import utl.Bag;
-import utl.DataUtl;
-import utl.Entry;
-import utl.ShopGenerator;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Vector;
 
-public class Shop {
-	private Bag<Goods> store;
-	private AccountBook accountBook;
-	private  ArrayList<Client> clients;
-	private  ArrayList<Category> categories;
-
-	public Shop() {
-		store = new Bag();
-		accountBook = new AccountBook();
-		clients = new ArrayList<>();
-		categories = new ArrayList<>();
-		initShop();
-	}
-
-	private  void initShop() {
-		ShopGenerator shopGenerator = new ShopGenerator(this);
-		shopGenerator.initShop();
-	}
-
-	public AccountBook getAccountBook() {
-
-		return accountBook;
-	}
-
-	public Bag<Goods> getStore() {
-		return store;
-	}
-
-	public ArrayList<Client> getClients() {
-		return clients;
-	}
-
-	public ArrayList<Category> getCategories() {
-		return categories;
-	}
-
-	public void addCategory(String data) {
-		if(categories != null) {
-			if(existCategory(data)) {
-				return;
-			}
-		}
-		categories.add(new Category(data));
-	}
-
-	private boolean existCategory(String data) {
-		if(findCategory(data) != null) {
-			return true;
-		}
-		return false;
-	}
-
-	public Category findCategory(String data) {
-		Category result = null;
-		if(categories != null) {
-			for (Category c : categories) {
-				if (c.getName().equals(data)) {
-					result = c;
-					break;
-				}
-			}
-		}
-		return result;
-	}
-
-
-	public void addSubcategory(String categoryName, String subcategory) {
-		Category category = findCategory(categoryName);
-		if(category != null) {
-			category.addSubcategory(subcategory);
-		} else {
-			throw new IllegalStateException(categoryName + " category doesn't exist");
-		}
-	}
-
-	public void buyGoods(Client client, Goods goods, int number) {
-		Calendar today = new GregorianCalendar();
-		today.setTime(new Date());
-		try {
-			if (soldGoods(goods, number)) {
-				Constructor constr = goods.getClass().getConstructor();
-				Goods g = (Goods) constr.newInstance();
-				g.setName(goods.getName());
-				g.setSubcategory(goods.getSubcategory());
-				g.setNumber(number);
-				g.setPrice(goods.getPrice());
-				client.buyGoods(g);
-				addSaleRecord(client, g, number, today);
-			}
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-
-
-	public  void buyGoods(Client client, Goods goods, int number, Calendar data) {
-
-		if (clients.contains(client)) {
-			if(soldGoods(goods, number)) {
-				goods.setNumber(number);
-				client.buyGoods(goods);
-				addSaleRecord(client, goods, number, data);
-			}
-		} else {
-			System.out.println("We haven't client " + client);
-		}
-	}
-
-	private  void addSaleRecord(Client client, Goods goods, int number, Calendar data) {
-		SaleRecord sr = new SaleRecord();
-		sr.setClient(client.getName());
-		sr.setGoods(goods.getName());
-		sr.setNumber(number);
-		sr.setCost(goods.getPrice());
-		sr.setData(data);
-		sr.setIdClient(client.getIdClient());
-		sr.setIdGoods(goods.getIdGoods());
-		accountBook.setRecord(sr);
-	}
-
-	public Vector<Item> getClientsItem() {
-		Vector<Item> result = new Vector<>();
-		for(Client cl : clients) {
-			result.add(new Item(cl, cl.getName()));
-		}
-		return result;
-	}
-
-	public Vector<Item> getGoodsItem(String category) {
-		Vector<Item> result = new Vector<>();
-		for(Goods g  : store.getList()) {
-			if(g.getCategory().equals(category)) {
-				result.add(new Item(g, g.getName()));
-			}
-		}
-		return result;
-	}
-
-	public Vector<Item> getGoodsItem(String category,String subcategory) {
-		Vector<Item> result = new Vector<>();
-		for(Goods g  : store.getList()) {
-			if(g.getCategory().equals(category) && g.getSubcategory().equals(subcategory)) {
-				result.add(new Item(g, g.getName()));
-			}
-		}
-		return result;
-	}
-
-	public Vector<String> getCategoriesVector() {
-		Vector<String> result = new Vector<>();
-		for (Category c : getCategories()) {
-			result.add(c.getName());
-		}
-		return result;
-	}
-
-	public Vector<String> getSubcategoriesVector(String category) {
-		Vector<String> result = new Vector<>();
-		Category c = findCategory(category);
-		if(c != null) {
-			for (Entry e : c.getSubcategories()) {
-				if (e != null) {
-					result.add(e.getName());
-				}
-			}
-		}
-		return result;
-	}
-
-	public Vector<String> getCategory() {
-		Vector<String> result = new Vector<>();
-		TreeSet<String> temp = new TreeSet<>();
-		for(Goods g : store.getList()) {
-			temp.add(g.getCategory());
-		}
-		for(String str : temp) {
-			result.add(str);
-		}
-		return result;
-	}
-
-	public Vector<String> getSubCategory(String category) {
-		Vector<String> result = new Vector<>();
-		TreeSet<String> temp = new TreeSet<>();
-		for(Goods g : store.getList()) {
-			if(g.getCategory().equals(category)) {
-				temp.add(g.getSubcategory());
-			}
-		}
-		for(String str : temp) {
-			result.add(str);
-		}
-		return result;
-	}
-
-	public boolean soldGoods(Goods gd, int count) {
-		Goods goods = null;
-		String name = gd.getName();
-		for(Goods g : store.getList()) {
-			if(name.equals(g.getName()) ) {
-				goods = g;
-			}
-		}
-		int temp = goods.getNumber() - count;
-		if (temp >= 0) {
-			goods.setNumber(temp);
-			goods.setSold(count + goods.getSold());
-			System.out.println("We have sold " + String.valueOf(count)
-					+ " " + name);
-			return true;
-		} else {
-			System.out.println("We can't sail so many " + name);
-			return false;
-		}
-	}
-
-	public void addNewClien(Client client) {
-
-	}
-
-
+public interface Shop {
+    public AccountBook getAccountBook();
+    public ArrayList<Client> getClients();
+    public ArrayList<Category> getCategories();
+    public ArrayList<Goods> getStore();
+    public void initShop(boolean resetData);
+    public void addCategory(String data);
+//    public boolean existCategory(String data);
+    public Category findCategory(String data);
+    public void addSubcategory(String categoryName, String subcategory);
+    public void addGoods(Goods goods);
+    public void buyGoods(Client client, Goods goods, int number);
+    public  void buyGoods(Client client, Goods goods, int number, Calendar data);
+    public  void addSaleRecord(Client client, Goods goods, int number, Calendar data);
+    public Vector<Item> getClientsItem();
+    public Vector<Item> getGoodsItem(String category);
+    public Vector<Item> getGoodsItem(String category,String subcategory);
+    public Vector<String> getCategoriesVector();
+    public Vector<String> getSubcategoriesVector(String category);
+    public Vector<String> getCategoriesFromGoods();
+    public Vector<String> getSubCategoriesFromGoods(String category);
+    public boolean soldGoods(Goods gd, int count);
+    public void addNewClient(Client client);
 }

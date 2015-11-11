@@ -23,9 +23,9 @@ public class GoodsTable extends JPanel {
     }
 
     private Object[][] setDataTable() {
-        Object[][] dataTable = new Object[shop.getStore().getSize()][];
+        Object[][] dataTable = new Object[shop.getStore().size()][];
         int i = 0;
-        for (Goods g : shop.getStore().getList()) {
+        for (Goods g : shop.getStore()) {
             if (g != null) {
                 Object[] co = {g.getName(),g.getCategory(),g.getSubcategory(),g.getNumber(),g.getPrice(),g.getSold()};
                 dataTable[i] = co;

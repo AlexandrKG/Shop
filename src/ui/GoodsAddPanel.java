@@ -10,7 +10,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 public class GoodsAddPanel extends JPanel {
 
@@ -143,11 +142,11 @@ public class GoodsAddPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String goodsName = lGoods.getText();
                 if(goodsName.isEmpty()) {
-                    JOptionPane.showMessageDialog(shopUI.getF(), "You mus set goods");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set goods");
                 } else if(categorySelec == null){
-                    JOptionPane.showMessageDialog(shopUI.getF(), "You mus select category");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus select category");
                 } else if(subCategorySelec == null){
-                    JOptionPane.showMessageDialog(shopUI.getF(), "You mus select subcategory");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus select subcategory");
                 } else {
                     Goods g = new Goods();
                     g.setName(lGoods.getText());
@@ -155,7 +154,7 @@ public class GoodsAddPanel extends JPanel {
                     g.setSubcategory(subCategorySelec);
                     g.setNumber(numberGoods);
                     g.setPrice(costGoods);
-                    shop.getStore().add(g);
+                    shop.addGoods(g);
                     shopUI.showGoodsForm();
                 }
                 spCost.setValue(0.0);

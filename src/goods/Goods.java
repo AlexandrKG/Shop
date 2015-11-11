@@ -84,4 +84,24 @@ public class Goods {
 	public long getIdGoods() {
 		return idGoods;
 	}
+
+	public void setIdGoods(long idGoods) {
+		this.idGoods = idGoods;
+	}
+
+	public void setIdCategory(long idCategory) {
+		this.idCategory = idCategory;
+	}
+
+	public void setIdSubcategory(long idSubcategory) {
+		this.idSubcategory = idSubcategory;
+	}
+
+	public long getIdCategory() {
+		return idCategory;
+	}
+
+	public long getIdSubcategory() {
+		return idSubcategory;
+	}
 }

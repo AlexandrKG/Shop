@@ -10,8 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Vector;
 
 public class SubcategoryEditPanel  extends JPanel {
     private Shop shop;
@@ -71,7 +69,7 @@ public class SubcategoryEditPanel  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(tCategory.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(shopUI.getF(), "You mus set new Subcategory");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set new Subcategory");
                 } else {
                     shop.addSubcategory(categorySelec, tCategory.getText());
                     updateSubcategoryTable();

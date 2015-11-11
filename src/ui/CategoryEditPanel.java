@@ -39,7 +39,7 @@ public class CategoryEditPanel  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(tCategory.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(shopUI.getF(), "You mus set new Category");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set new Category");
                 } else {
                     shop.addCategory(tCategory.getText());
                     updateCategoryEditPanel();

@@ -5,12 +5,12 @@ import goods.Bird;
 import goods.Coop;
 import goods.Goods;
 import shop.Client;
-import shop.Shop;
+import shop.ShopLocal;
 
 public class ShopGenerator {
 
-    private Shop shop;
-    public ShopGenerator(Shop shop) {
+    private ShopLocal shop;
+    public ShopGenerator(ShopLocal shop) {
         this.shop = shop;
     }
 
@@ -71,18 +71,21 @@ public class ShopGenerator {
     private  void initClients() {
         Client temp;
         temp = new Client("Anna");
+        temp.setIdClient(System.currentTimeMillis());
         temp.setAddress("str.Pobedi,19");
         temp.setAge(20);
         temp.setGender("Female");
         shop.getClients().add(temp);
 
         temp = new Client("Petr");
+        temp.setIdClient(System.currentTimeMillis());
         temp.setAddress("str.Lesi Ukrainki,10");
         temp.setAge(35);
         temp.setGender("Male");
         shop.getClients().add(temp);
 
         temp = new Client("Nikolay");
+        temp.setIdClient(System.currentTimeMillis());
         temp.setAddress("str.Tampere,3");
         temp.setAge(19);
         temp.setGender("Male");
