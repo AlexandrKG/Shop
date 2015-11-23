@@ -9,8 +9,6 @@ import shop.ShopMySQL;
 import utl.DataUtl;
 import utl.Entry;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +16,11 @@ import java.sql.Statement;
 
 public class LoaderData {
     private ShopMySQL shopMySQL;
+    private DataSourceMySQL dataSource;
 
     public LoaderData(ShopMySQL shop) {
         shopMySQL = shop;
-
+        dataSource = shop.getDataSourceMySQL();
     }
 
     private void setClientsFromDB(Connection connection)  throws SQLException {
@@ -144,7 +143,7 @@ public class LoaderData {
         Connection connection = null;
 
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSource.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start init FROM BD!");
             }
@@ -155,10 +154,6 @@ public class LoaderData {
             setTransactionsFromDB(connection);
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {

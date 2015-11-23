@@ -3,6 +3,7 @@ package shop;
 
 import db.DataSourceMySQL;
 import db.LoaderData;
+import db.ShopDerbyInit;
 import db.ShopSQLGenerator;
 import goods.Category;
 import goods.Goods;
@@ -22,11 +23,14 @@ import java.util.*;
 
 public class ShopMySQL implements Shop{
 
+    private final boolean flagMySQL = false; // false=Derby true=MySQL
     private ArrayList<Goods> store;
     private AccountBook accountBook;
     private ArrayList<Client> clients;
     private  ArrayList<Category> categories;
-    private ShopSQLGenerator exampleDB;
+    private DataSourceMySQL dataSourceMySQL;
+    private ShopSQLGenerator mySQLDB;
+    private ShopDerbyInit derbyDB;
     private LoaderData loaderData;
 
     public ArrayList<Goods> getStore() {
@@ -45,20 +49,32 @@ public class ShopMySQL implements Shop{
         return categories;
     }
 
+    public DataSourceMySQL getDataSourceMySQL() {
+        return dataSourceMySQL;
+    }
+
     public ShopMySQL() {
         store = new ArrayList<>();
         accountBook = new AccountBook();
         clients = new ArrayList<>();
         categories = new ArrayList<>();
+        try {
+            dataSourceMySQL = new DataSourceMySQL(flagMySQL);
+        } catch (IOException | SQLException | PropertyVetoException e) {
+            e.printStackTrace();
+        }
         initShop(false);
     }
 
 
     @Override
     public void initShop(boolean resetData) {
-        if(resetData) {
-            exampleDB = new ShopSQLGenerator();
-            exampleDB.initData();
+        if(!flagMySQL) {
+            derbyDB = new ShopDerbyInit(this);
+            derbyDB.initData();
+        } else if(resetData) {
+            mySQLDB = new ShopSQLGenerator(this);
+            mySQLDB.initData();
         }
         loaderData = new LoaderData(this);
         loaderData.initDataFromBD();
@@ -292,7 +308,7 @@ public class ShopMySQL implements Shop{
         Connection connection = null;
         PreparedStatement preparedStatement;
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSourceMySQL.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start INSERT client!");
             }
@@ -317,10 +333,6 @@ public class ShopMySQL implements Shop{
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             if (connection != null) {
                 try {
@@ -342,7 +354,7 @@ public class ShopMySQL implements Shop{
         Connection connection = null;
         PreparedStatement preparedStatement;
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSourceMySQL.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start INSERT category!");
             }
@@ -361,10 +373,6 @@ public class ShopMySQL implements Shop{
             categ.setId(categID);
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {
@@ -388,7 +396,7 @@ public class ShopMySQL implements Shop{
         Connection connection = null;
         PreparedStatement preparedStatement;
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSourceMySQL.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start INSERT subcategory!");
             }
@@ -409,10 +417,6 @@ public class ShopMySQL implements Shop{
             subcategory.setId(subcategID);
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {
@@ -436,7 +440,7 @@ public class ShopMySQL implements Shop{
         Connection connection = null;
         PreparedStatement preparedStatement;
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSourceMySQL.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start INSERT goods!");
             }
@@ -460,10 +464,6 @@ public class ShopMySQL implements Shop{
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             if (connection != null) {
                 try {
@@ -484,7 +484,7 @@ public class ShopMySQL implements Shop{
         Connection connection = null;
         PreparedStatement preparedStatement;
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSourceMySQL.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start UPDATE goods count in shop!");
             }
@@ -497,10 +497,6 @@ public class ShopMySQL implements Shop{
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {
@@ -524,7 +520,7 @@ public class ShopMySQL implements Shop{
         Connection connection = null;
         PreparedStatement preparedStatement;
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSourceMySQL.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start INSERT record in trade!");
             }
@@ -549,10 +545,6 @@ public class ShopMySQL implements Shop{
             saleRecord.setIdRecord(recordID);
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {

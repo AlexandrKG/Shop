@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mysql-connector-java-5.1.36" level="project" />
     <orderEntry type="library" name="c3p0-0.9.5.1" level="project" />
+    <orderEntry type="library" name="derby-10.11.1.1" level="project" />
   </component>
 </module>

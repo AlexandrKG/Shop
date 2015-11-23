@@ -4,6 +4,9 @@
     <root id="archive" name="Shop.jar">
       <element id="module-output" name="Shop" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../Mylibraries/mysql/mysql-connector-java/5.1.36/mysql-connector-java-5.1.36.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Mylibraries/mysql/mysql-connector-java/c3p0-0.9.5.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Mylibraries/mysql/mysql-connector-java/mchange-commons-java-0.2.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Mylibraries/derby/derby-10.11.1.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

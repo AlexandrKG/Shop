@@ -1,5 +1,7 @@
 package db;
 
+import shop.Shop;
+import shop.ShopMySQL;
 import utl.DataUtl;
 
 import java.beans.PropertyVetoException;
@@ -9,6 +11,7 @@ import java.sql.*;
 public class ShopSQLGenerator {
 
     private Connection connection;
+    private DataSourceMySQL dataSource;
     private PreparedStatement preparedStatement;
     private static final String INSERT_NEW_CLIENTS =
             "INSERT INTO clients(name,age,gender,address,telephone) VALUES(?,?,?,?,?)";
@@ -28,6 +31,10 @@ public class ShopSQLGenerator {
     private static final String DEL_ALL_GOODS = "DELETE FROM goods";
     private static final String DEL_ALL_SHOPS = "DELETE FROM shop";
     private static final String DEL_ALL_TRADE = "DELETE FROM trade";
+
+    public ShopSQLGenerator(ShopMySQL shop) {
+        dataSource = shop.getDataSourceMySQL();
+    }
 
     private void initClients() throws SQLException {
         preparedStatement = connection.prepareStatement(DEL_ALL_CLIENTS);
@@ -236,7 +243,7 @@ public class ShopSQLGenerator {
         preparedStatement = null;
 
         try {
-            connection = DataSourceMySQL.getInstance().getConnection();
+            connection = dataSource.getConnection();
             if (!connection.isClosed()) {
                 System.out.println("Connection open. Start initBD!");
             }
@@ -250,10 +257,6 @@ public class ShopSQLGenerator {
 
             preparedStatement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (preparedStatement != null) {
