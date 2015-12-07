@@ -14,7 +14,7 @@ public class LauncherShop {
 		splash.close();
 		
 //		Shop shop = new ShopLocal();
-		Shop shop = new ShopMySQL();
+		Shop shop = new ShopDB();
 		ShopUI shopUI = new ShopSwingUI(shop);
 	}
 

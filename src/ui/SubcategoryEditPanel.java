@@ -15,7 +15,7 @@ public class SubcategoryEditPanel  extends JPanel {
     private Shop shop;
     private String categorySelec;
     private DefaultTableModel mod;
-    private  String[] columnNames = {"Category","ID","Subcategory"};
+    private  String[] columnNames = {"Category","Subcategory"}; //"ID",
     private  DefaultComboBoxModel<String> modelComboBoxCateg;
 
     public SubcategoryEditPanel(final Shop shop, final ShopUI shopUI) {
@@ -27,7 +27,6 @@ public class SubcategoryEditPanel  extends JPanel {
 //                GridBagConstraints.LINE_START, GridBagConstraints.NONE,
 //                new Insets(0, 0, 0, 0), 0, 0));
 
-//        Vector<String> modelComboBoxCateg = this.shop.getCategory();
         modelComboBoxCateg = new DefaultComboBoxModel(shop.getCategoriesVector());
         JComboBox comboCg = new JComboBox(modelComboBoxCateg);
         comboCg.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
@@ -88,7 +87,7 @@ public class SubcategoryEditPanel  extends JPanel {
             int i = 0;
             for (Entry e : c.getSubcategories()) {
                 if (e != null) {
-                    Object[] co = {categorySelec,String.valueOf(e.getId()), e.getName()};
+                    Object[] co = {categorySelec, e.getName()};
                     dataTable[i] = co;
                 }
                 i++;

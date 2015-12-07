@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class CategoryEditPanel  extends JPanel {
     private Shop shop;
     private DefaultTableModel mod;
-    private  String[] columnNames = {"ID","Name"};
+    private  String[] columnNames = {"Name"};   //"ID",
 
     public CategoryEditPanel(final Shop shop, final ShopUI shopUI) {
         this.shop = shop;
@@ -54,7 +54,8 @@ public class CategoryEditPanel  extends JPanel {
         int i = 0;
         for (Category c : shop.getCategories()) {
             if (c != null) {
-                Object[] co = {String.valueOf(c.getId()),c.getName()};
+//                Object[] co = {String.valueOf(c.getId()),c.getName()};
+                Object[] co = {c.getName()};
                 dataTable[i] = co;
             }
             i++;

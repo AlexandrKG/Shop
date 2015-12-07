@@ -1,23 +1,19 @@
 package db;
 
-
-import shop.ShopMySQL;
 import utl.DataUtl;
 
-import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ShopDerbyInit {
 
-    private DataSourceMySQL dataSource;
+    private DataSourceConnection dataSource;
     private Connection connection;
     private PreparedStatement preparedStatement;
 
-    public ShopDerbyInit(ShopMySQL shop) {
-        dataSource = shop.getDataSourceMySQL();
+    public ShopDerbyInit(DataSourceConnection connection) {
+        dataSource = connection;
     }
 
     private static final String CREATE_CATEGORY = "CREATE TABLE category " +

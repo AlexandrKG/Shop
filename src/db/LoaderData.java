@@ -5,7 +5,7 @@ import goods.Category;
 import goods.Goods;
 import reports.SaleRecord;
 import shop.Client;
-import shop.ShopMySQL;
+import shop.ShopDB;
 import utl.DataUtl;
 import utl.Entry;
 
@@ -15,12 +15,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class LoaderData {
-    private ShopMySQL shopMySQL;
-    private DataSourceMySQL dataSource;
+    private ShopDB shopDB;
+    private DataSourceConnection dataSource;
 
-    public LoaderData(ShopMySQL shop) {
-        shopMySQL = shop;
-        dataSource = shop.getDataSourceMySQL();
+    public LoaderData(ShopDB shopDB) {
+        this.shopDB = shopDB;
+        dataSource = shopDB.getQueriesToDB().getDataSourceConnection();
     }
 
     private void setClientsFromDB(Connection connection)  throws SQLException {
@@ -34,7 +34,7 @@ public class LoaderData {
             temp.setAge(resultSet.getInt("age"));
             temp.setAddress(resultSet.getString("address"));
             temp.setTelephone(resultSet.getString("telephone"));
-            shopMySQL.getClients().add(temp);
+            shopDB.getClients().add(temp);
         }
         statement.close();
     }
@@ -45,7 +45,7 @@ public class LoaderData {
         while (resultSet.next()) {
             temp = new Category(resultSet.getString("name"));
             temp.setId(resultSet.getInt("id"));
-            shopMySQL.getCategories().add(temp);
+            shopDB.getCategories().add(temp);
         }
         statement.close();
     }
@@ -53,17 +53,16 @@ public class LoaderData {
     private void setSubcategoriesFromDB(Connection connection)  throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet resultSet;
-        for(int i = 0; i < shopMySQL.getCategories().size(); i++) {
-//        for(Category category : shopMySQL.getCategories()) {
+        for(int i = 0; i < shopDB.getCategories().size(); i++) {
             resultSet = statement.executeQuery("SELECT * FROM subcategory " +
                     "WHERE idcategory = " +
-                    String.valueOf(shopMySQL.getCategories().get(i).getId()));
+                    String.valueOf(shopDB.getCategories().get(i).getId()));
             Entry temp;
             while (resultSet.next()) {
                 temp = new Entry();
                 temp.setId(resultSet.getInt("id"));
                 temp.setName(resultSet.getString("name"));
-                shopMySQL.getCategories().get(i).addSubcategory(temp);
+                shopDB.getCategories().get(i).addSubcategory(temp);
             }
         }
         statement.close();
@@ -85,12 +84,12 @@ public class LoaderData {
             g.setName(resultSet.getString("name"));
             g.setNumber(resultSet.getInt("number"));
             g.setPrice(resultSet.getInt("price"));
-            shopMySQL.getStore().add(g);
+            shopDB.getStore().add(g);
         }
         statement.close();
 
-        for(Goods goods : shopMySQL.getStore()) {
-            for(Category category : shopMySQL.getCategories()) {
+        for(Goods goods : shopDB.getStore()) {
+            for(Category category : shopDB.getCategories()) {
                 if(category.getId() == goods.getIdCategory()) {
                     goods.setCategory(category.getName());
                     for(Entry e : category.getSubcategories()) {
@@ -118,18 +117,18 @@ public class LoaderData {
             record.setNumber(resultSet.getInt("number"));
             record.setCost(resultSet.getInt("price"));
             record.setData(DataUtl.getStringData(resultSet.getDate("data")));
-            shopMySQL.getAccountBook().getRegisterSale().add(record);
+            shopDB.getAccountBook().getRegisterSale().add(record);
         }
         statement.close();
 
-        for(SaleRecord rec : shopMySQL.getAccountBook().getRegisterSale()) {
-            for (Client client : shopMySQL.getClients()) {
+        for(SaleRecord rec : shopDB.getAccountBook().getRegisterSale()) {
+            for (Client client : shopDB.getClients()) {
                 if (client.getIdClient() == rec.getIdClient()) {
                     rec.setClient(client.getName());
                     break;
                 }
             }
-            for(Goods g : shopMySQL.getStore()) {
+            for(Goods g : shopDB.getStore()) {
                 if(g.getIdGoods() == rec.getIdGoods()) {
                     rec.setGoods(g.getName());
                     break;

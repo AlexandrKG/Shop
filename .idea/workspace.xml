@@ -48,101 +48,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DataSourceMySQL.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/DataSourceMySQL.java">
+      <file leaf-file-name="ShopDB.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/shop/ShopDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+            <state vertical-scroll-proportion="-8.898766">
+              <caret line="46" column="44" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopSQLGenerator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/ShopSQLGenerator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="260" column="0" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1448228814115" expanded="true" signature="387:459" placeholder="INSERT INTO ..." />
-                <marker date="1448228814115" expanded="true" signature="531:567" placeholder="INSERT INTO ..." />
-                <marker date="1448228814115" expanded="true" signature="642:694" placeholder="INSERT INTO ..." />
-                <marker date="1448228814115" expanded="true" signature="761:823" placeholder="INSERT INTO ..." />
-                <marker date="1448228814115" expanded="true" signature="890:942" placeholder="INSERT INTO ..." />
-                <marker date="1448228814115" expanded="true" signature="1009:1080" placeholder="INSERT INTO ..." />
-                <marker date="1448228814115" expanded="true" signature="1134:1153" placeholder="DELETE FROM ..." />
-                <marker date="1448228814115" expanded="true" signature="1210:1230" placeholder="DELETE FROM ..." />
-                <marker date="1448228814115" expanded="true" signature="1290:1313" placeholder="DELETE FROM ..." />
-                <marker date="1448228814115" expanded="true" signature="1365:1382" placeholder="DELETE FROM ..." />
-                <marker date="1448228814115" expanded="true" signature="1434:1450" placeholder="DELETE FROM ..." />
-                <marker date="1448228814115" expanded="true" signature="1502:1519" placeholder="DELETE FROM ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopMySQL.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/shop/ShopMySQL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="70" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="70" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1448229318490" expanded="true" signature="9008:9080" placeholder="INSERT INTO ..." />
-                <marker date="1448229318490" expanded="true" signature="9121:9173" placeholder="SELECT * FRO..clients..." />
-                <marker date="1448229318490" expanded="true" signature="10923:10959" placeholder="INSERT INTO ..." />
-                <marker date="1448229318490" expanded="true" signature="11002:11039" placeholder="SELECT * FRO..category..." />
-                <marker date="1448229318490" expanded="true" signature="12489:12541" placeholder="INSERT INTO ..." />
-                <marker date="1448229318490" expanded="true" signature="12587:12667" placeholder="SELECT * FRO..subcategory..." />
-                <marker date="1448229318490" expanded="true" signature="14234:14298" placeholder="INSERT INTO ..." />
-                <marker date="1448229318490" expanded="true" signature="14338:14434" placeholder="SELECT * FRO..goods..." />
-                <marker date="1448229318490" expanded="true" signature="16129:16182" placeholder="UPDATE shop ..." />
-                <marker date="1448229318490" expanded="true" signature="17371:17442" placeholder="INSERT INTO ..." />
-                <marker date="1448229318490" expanded="true" signature="17483:17571" placeholder="SELECT * FRO..trade..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopDerbyInit.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/ShopDerbyInit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="201" column="37" selection-start-line="201" selection-start-column="37" selection-end-line="201" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1448265926468" expanded="true" signature="525:716" placeholder="CREATE TABLE..category..." />
-                <marker date="1448265926468" expanded="true" signature="770:1154" placeholder="CREATE TABLE..clients..." />
-                <marker date="1448265926468" expanded="true" signature="1206:1498" placeholder="CREATE TABLE..goods..." />
-                <marker date="1448265926468" expanded="true" signature="1549:1735" placeholder="CREATE TABLE..shop..." />
-                <marker date="1448265926468" expanded="true" signature="1793:2029" placeholder="CREATE TABLE..subcategory..." />
-                <marker date="1448265926468" expanded="true" signature="2081:2441" placeholder="CREATE TABLE..trade..." />
-                <marker date="1448265926468" expanded="true" signature="2511:2583" placeholder="INSERT INTO ..." />
-                <marker date="1448265926468" expanded="true" signature="2655:2691" placeholder="INSERT INTO ..." />
-                <marker date="1448265926468" expanded="true" signature="2766:2818" placeholder="INSERT INTO ..." />
-                <marker date="1448265926468" expanded="true" signature="2885:2947" placeholder="INSERT INTO ..." />
-                <marker date="1448265926468" expanded="true" signature="3014:3066" placeholder="INSERT INTO ..." />
-                <marker date="1448265926468" expanded="true" signature="3133:3204" placeholder="INSERT INTO ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoaderData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/LoaderData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1448228680349" expanded="true" signature="694:715" placeholder="SELECT * FRO..clients..." />
-                <marker date="1448228680349" expanded="true" signature="1410:1432" placeholder="SELECT * FRO..category..." />
-                <marker date="1448228680349" expanded="true" signature="2051:2121" placeholder="SELECT * FRO..subcategory..." />
-                <marker date="1448228680349" expanded="true" signature="2834:2935" placeholder="SELECT missi..goods..." />
-                <marker date="1448228680349" expanded="true" signature="4226:4245" placeholder="SELECT * FRO..trade..." />
+                <element signature="e#1092#1093#0" expanded="true" />
+                <element signature="e#1125#1126#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -181,8 +95,6 @@
         <option value="$PROJECT_DIR$/src/goods/Goods.java" />
         <option value="$PROJECT_DIR$/src/reports/SaleRecord.java" />
         <option value="$PROJECT_DIR$/src/ui/ShopSwingUI.java" />
-        <option value="$PROJECT_DIR$/src/ui/SubcategoryEditPanel.java" />
-        <option value="$PROJECT_DIR$/src/ui/CategoryEditPanel.java" />
         <option value="$PROJECT_DIR$/src/ui/ClientTable.java" />
         <option value="$PROJECT_DIR$/src/ui/GoodsTable.java" />
         <option value="$PROJECT_DIR$/src/ui/SellingPanel.java" />
@@ -195,12 +107,18 @@
         <option value="$PROJECT_DIR$/src/shop/Shop.java" />
         <option value="$PROJECT_DIR$/src/shop/ShopLocal.java" />
         <option value="$PROJECT_DIR$/src/ui/GoodsAddPanel.java" />
-        <option value="$PROJECT_DIR$/src/db/DataSourceMySQL.java" />
-        <option value="$PROJECT_DIR$/src/db/LoaderData.java" />
-        <option value="$PROJECT_DIR$/src/db/ShopSQLGenerator.java" />
-        <option value="$PROJECT_DIR$/src/shop/ShopMySQL.java" />
         <option value="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+        <option value="$PROJECT_DIR$/src/db/DBCoordinator.java" />
+        <option value="$PROJECT_DIR$/src/db/DataSourceMySQL.java" />
+        <option value="$PROJECT_DIR$/src/db/DataSourceConnection.java" />
+        <option value="$PROJECT_DIR$/src/shop/ShopMySQL.java" />
+        <option value="$PROJECT_DIR$/src/db/Queries.java" />
+        <option value="$PROJECT_DIR$/src/shop/ShopDB.java" />
+        <option value="$PROJECT_DIR$/src/db/LoaderData.java" />
         <option value="$PROJECT_DIR$/src/db/ShopDerbyInit.java" />
+        <option value="$PROJECT_DIR$/src/db/ShopSQLGenerator.java" />
+        <option value="$PROJECT_DIR$/src/ui/CategoryEditPanel.java" />
+        <option value="$PROJECT_DIR$/src/ui/SubcategoryEditPanel.java" />
       </list>
     </option>
   </component>
@@ -240,8 +158,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -402,7 +321,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -744,15 +662,21 @@
       <workItem from="1448125793500" duration="389000" />
       <workItem from="1448131579031" duration="2914000" />
       <workItem from="1448221617609" duration="5938000" />
-      <workItem from="1448265600921" duration="891000" />
+      <workItem from="1448265600921" duration="1681000" />
+      <workItem from="1448294054015" duration="731000" />
+      <workItem from="1448618250156" duration="576000" />
+      <workItem from="1448657847640" duration="509000" />
+      <workItem from="1449404133265" duration="9903000" />
+      <workItem from="1449430710875" duration="983000" />
+      <workItem from="1449478531092" duration="2113000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181279000" />
+    <option name="totallyTimeSpent" value="196884000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="778" extended-state="6" />
+    <frame x="-4" y="-4" width="1288" height="778" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -808,21 +732,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/shop/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/GoodsAddPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="39" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/ShopSwingUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -942,20 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/CategoryEditPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13076924">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/ClientTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36615384">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/GoodsTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.70615387">
@@ -981,13 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6076923">
           <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/SubcategoryEditPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="55" selection-start-line="86" selection-start-column="37" selection-end-line="86" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1066,13 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/shop/LauncherShop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52619046">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utl/ShopGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1091,7 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="79" column="26" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1138,9 +1018,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8378378">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1148,6 +1025,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="120" column="9" selection-start-line="101" selection-start-column="0" selection-end-line="120" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04197531">
+          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1163,99 +1047,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/DBCoordinator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="30" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shop/LauncherShop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5382716">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/db/LoaderData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state vertical-scroll-proportion="2.3506172">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1448228680349" expanded="true" signature="694:715" placeholder="SELECT * FRO..clients..." />
-            <marker date="1448228680349" expanded="true" signature="1410:1432" placeholder="SELECT * FRO..category..." />
-            <marker date="1448228680349" expanded="true" signature="2051:2121" placeholder="SELECT * FRO..subcategory..." />
-            <marker date="1448228680349" expanded="true" signature="2834:2935" placeholder="SELECT missi..goods..." />
-            <marker date="1448228680349" expanded="true" signature="4226:4245" placeholder="SELECT * FRO..trade..." />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/DataSourceMySQL.java">
+    <entry file="file://$PROJECT_DIR$/src/db/Queries.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+        <state vertical-scroll-proportion="-11.234568">
+          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+    <entry file="file://$PROJECT_DIR$/src/db/DataSourceConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04197531">
-          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.67160493">
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/db/ShopDerbyInit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="201" column="37" selection-start-line="201" selection-start-column="37" selection-end-line="201" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1448265926468" expanded="true" signature="525:716" placeholder="CREATE TABLE..category..." />
-            <marker date="1448265926468" expanded="true" signature="770:1154" placeholder="CREATE TABLE..clients..." />
-            <marker date="1448265926468" expanded="true" signature="1206:1498" placeholder="CREATE TABLE..goods..." />
-            <marker date="1448265926468" expanded="true" signature="1549:1735" placeholder="CREATE TABLE..shop..." />
-            <marker date="1448265926468" expanded="true" signature="1793:2029" placeholder="CREATE TABLE..subcategory..." />
-            <marker date="1448265926468" expanded="true" signature="2081:2441" placeholder="CREATE TABLE..trade..." />
-            <marker date="1448265926468" expanded="true" signature="2511:2583" placeholder="INSERT INTO ..." />
-            <marker date="1448265926468" expanded="true" signature="2655:2691" placeholder="INSERT INTO ..." />
-            <marker date="1448265926468" expanded="true" signature="2766:2818" placeholder="INSERT INTO ..." />
-            <marker date="1448265926468" expanded="true" signature="2885:2947" placeholder="INSERT INTO ..." />
-            <marker date="1448265926468" expanded="true" signature="3014:3066" placeholder="INSERT INTO ..." />
-            <marker date="1448265926468" expanded="true" signature="3133:3204" placeholder="INSERT INTO ..." />
-          </folding>
+        <state vertical-scroll-proportion="0.04197531">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/db/ShopSQLGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="260" column="0" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.08395062">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/ClientTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27027026">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/SubcategoryEditPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77037036">
+          <caret line="89" column="49" selection-start-line="89" selection-start-column="49" selection-end-line="89" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/CategoryEditPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6296296">
+          <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1448228814115" expanded="true" signature="387:459" placeholder="INSERT INTO ..." />
-            <marker date="1448228814115" expanded="true" signature="531:567" placeholder="INSERT INTO ..." />
-            <marker date="1448228814115" expanded="true" signature="642:694" placeholder="INSERT INTO ..." />
-            <marker date="1448228814115" expanded="true" signature="761:823" placeholder="INSERT INTO ..." />
-            <marker date="1448228814115" expanded="true" signature="890:942" placeholder="INSERT INTO ..." />
-            <marker date="1448228814115" expanded="true" signature="1009:1080" placeholder="INSERT INTO ..." />
-            <marker date="1448228814115" expanded="true" signature="1134:1153" placeholder="DELETE FROM ..." />
-            <marker date="1448228814115" expanded="true" signature="1210:1230" placeholder="DELETE FROM ..." />
-            <marker date="1448228814115" expanded="true" signature="1290:1313" placeholder="DELETE FROM ..." />
-            <marker date="1448228814115" expanded="true" signature="1365:1382" placeholder="DELETE FROM ..." />
-            <marker date="1448228814115" expanded="true" signature="1434:1450" placeholder="DELETE FROM ..." />
-            <marker date="1448228814115" expanded="true" signature="1502:1519" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/shop/ShopMySQL.java">
+    <entry file="file://$PROJECT_DIR$/src/shop/ShopDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="70" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="70" />
+        <state vertical-scroll-proportion="-8.898766">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1448229318490" expanded="true" signature="9008:9080" placeholder="INSERT INTO ..." />
-            <marker date="1448229318490" expanded="true" signature="9121:9173" placeholder="SELECT * FRO..clients..." />
-            <marker date="1448229318490" expanded="true" signature="10923:10959" placeholder="INSERT INTO ..." />
-            <marker date="1448229318490" expanded="true" signature="11002:11039" placeholder="SELECT * FRO..category..." />
-            <marker date="1448229318490" expanded="true" signature="12489:12541" placeholder="INSERT INTO ..." />
-            <marker date="1448229318490" expanded="true" signature="12587:12667" placeholder="SELECT * FRO..subcategory..." />
-            <marker date="1448229318490" expanded="true" signature="14234:14298" placeholder="INSERT INTO ..." />
-            <marker date="1448229318490" expanded="true" signature="14338:14434" placeholder="SELECT * FRO..goods..." />
-            <marker date="1448229318490" expanded="true" signature="16129:16182" placeholder="UPDATE shop ..." />
-            <marker date="1448229318490" expanded="true" signature="17371:17442" placeholder="INSERT INTO ..." />
-            <marker date="1448229318490" expanded="true" signature="17483:17571" placeholder="SELECT * FRO..trade..." />
+            <element signature="e#1092#1093#0" expanded="true" />
+            <element signature="e#1125#1126#0" expanded="true" />
           </folding>
         </state>
       </provider>
