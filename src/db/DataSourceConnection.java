@@ -2,8 +2,10 @@ package db;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -12,17 +14,28 @@ public class DataSourceConnection {
     private static DataSourceConnection datasource;
     private ComboPooledDataSource cpds;
 
-    public DataSourceConnection(String choiceDB) throws IOException, SQLException, PropertyVetoException {
-        cpds = new ComboPooledDataSource();
-        if(choiceDB.equals("MySQL")) {
-            cpds.setDriverClass("com.mysql.jdbc.Driver");
-            cpds.setJdbcUrl("jdbc:mysql://localhost:3306/shopdb");
-            cpds.setUser("alex");
-            cpds.setPassword("mysql");
-        } else {
-            cpds.setDriverClass("org.apache.derby.jdbc.EmbeddedDriver");
-            cpds.setJdbcUrl("jdbc:derby:DerbyDB;create=true");
+    public DataSourceConnection(String fileName) {
+        try {
+            setConnection(fileName);
+        } catch (IOException | SQLException | PropertyVetoException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void setConnection(String fileName)
+            throws IOException, SQLException, PropertyVetoException {
+
+        InputStream inputStream;
+        Properties property = new Properties();
+        inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
+        property.load(inputStream);
+
+        cpds = new ComboPooledDataSource();
+        cpds.setDriverClass(property.getProperty("dbDriverClass"));
+        cpds.setJdbcUrl(property.getProperty("dbJdbcUrl"));
+        cpds.setUser(property.getProperty("dbUser"));
+        cpds.setPassword(property.getProperty("dbPassword"));
+
         cpds.setMinPoolSize(5);
         cpds.setAcquireIncrement(5);
         cpds.setMaxPoolSize(10);

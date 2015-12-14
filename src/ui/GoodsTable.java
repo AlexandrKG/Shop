@@ -1,7 +1,7 @@
 package ui;
 
 
-import goods.Goods;
+import domain.Goods;
 import shop.Shop;
 
 import javax.swing.*;
@@ -27,7 +27,8 @@ public class GoodsTable extends JPanel {
         int i = 0;
         for (Goods g : shop.getStore()) {
             if (g != null) {
-                Object[] co = {g.getName(),g.getCategory(),g.getSubcategory(),g.getNumber(),g.getPrice(),g.getSold()};
+                Object[] co = {g.getName(),g.getCategory().getName(),
+                        g.getSubcategory().getName(),g.getNumber(),g.getPrice(),g.getSold()};
                 dataTable[i] = co;
             }
             i++;

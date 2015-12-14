@@ -2,7 +2,7 @@ package ui;
 
 
 
-import shop.Client;
+import domain.Client;
 import shop.Shop;
 
 import javax.swing.*;

@@ -1,8 +1,10 @@
 package ui;
 
 
-import goods.Goods;
-import shop.Client;
+import domain.Category;
+import domain.Goods;
+import domain.Client;
+import domain.Subcategory;
 import shop.Shop;
 
 import javax.swing.*;
@@ -11,6 +13,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class SellingPanel  extends JPanel {
     private Shop shop;
@@ -19,13 +22,14 @@ public class SellingPanel  extends JPanel {
     private JComboBox comboCg;
     private JComboBox comboG;
     private Client clientSelectRefer;
-    private String categorySelec;
-    private String subcategorySelec;
+    private Category categorySelecRefer;
+    private Subcategory subcategorySelecRefer;
     private DefaultComboBoxModel<Item> modelCBG;
-    private DefaultComboBoxModel<String> modelCBSubCateg;
+    private DefaultComboBoxModel<Item> modelCBSubCateg;
     private Goods goodsSelectRefer;
     private int numberGoods;
-    private  DefaultComboBoxModel<String> modelComboBoxCateg;
+    private  DefaultComboBoxModel<Item> modelComboBoxCateg;
+    private  SpinnerNumberModel spinnerNumberModel;
 
     public SellingPanel(final Shop shop, final ShopUI shopUI) {
         this.shop = shop;
@@ -58,30 +62,25 @@ public class SellingPanel  extends JPanel {
                 new Insets(0, 0, 0, 0), 0, 0));
 
         JLabel lCategory = new JLabel("Categories:");
-        modelComboBoxCateg = new DefaultComboBoxModel(shop.getCategoriesFromGoods());
+        modelComboBoxCateg = new DefaultComboBoxModel(shop.getCategoriesItem());
         comboCg = new JComboBox(modelComboBoxCateg);
         comboCg.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
         comboCg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox) e.getSource();
-                categorySelec = (String) cb.getSelectedItem();
-                if (modelCBSubCateg != null && modelCBG != null) {
-                    modelCBSubCateg.removeAllElements();
-                    for (String str : shop.getSubCategoriesFromGoods(categorySelec)) {
-                        modelCBSubCateg.addElement(str);
-                    }
-                    modelCBG.removeAllElements();
-                    for (Item item : shop.getGoodsItem(categorySelec
-                            , modelCBSubCateg.getElementAt(0))) {
-                        modelCBG.addElement(item);
-                    }
-
+                Item item = (Item) cb.getSelectedItem();
+                if (item != null) {
+                    categorySelecRefer = (Category) item.getObj();
+                } else {
+                    categorySelecRefer = null;
                 }
+                updateModelSubcateg();
+                updateModelGoods();
             }
         });
         if (modelComboBoxCateg.getSize() > 0) {
-            categorySelec = modelComboBoxCateg.getElementAt(0);
+            categorySelecRefer =(Category)modelComboBoxCateg.getElementAt(0).getObj();
             comboCg.setSelectedIndex(0);
         }
         add(lCategory, new GridBagConstraints(1, 0, 1, 1, 0, 0,
@@ -92,24 +91,26 @@ public class SellingPanel  extends JPanel {
                 new Insets(0, 0, 0, 0), 0, 0));
 
         JLabel lSubCateg = new JLabel("Subcategories:");
-        String subcategorySelec = "";
-        modelCBSubCateg = new DefaultComboBoxModel(shop.getSubCategoriesFromGoods(categorySelec));
+        modelCBSubCateg = new DefaultComboBoxModel(shop.getSubcategoriesItem(categorySelecRefer));
         JComboBox comboSC = new JComboBox(modelCBSubCateg);
         comboSC.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
         comboSC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JComboBox cb = (JComboBox) e.getSource();
-                if (modelCBG != null) {
-                    modelCBG.removeAllElements();
-                    for (Item item : shop.getGoodsItem(categorySelec
-                            , (String) cb.getSelectedItem())) {
-                        modelCBG.addElement(item);
+                if (modelCBSubCateg != null) {
+                    JComboBox cb = (JComboBox) e.getSource();
+                    Item item = (Item) cb.getSelectedItem();
+                    if (item != null) {
+                        subcategorySelecRefer = (Subcategory) item.getObj();
+                    } else {
+                        subcategorySelecRefer = null;
                     }
+                    updateModelGoods();
                 }
             }
         });
         if (modelCBSubCateg.getSize() > 0) {
+            subcategorySelecRefer =(Subcategory)modelCBSubCateg.getElementAt(0).getObj();
             comboSC.setSelectedIndex(0);
         }
         add(lSubCateg, new GridBagConstraints(2, 0, 1, 1, 0, 0,
@@ -120,20 +121,25 @@ public class SellingPanel  extends JPanel {
                 new Insets(0, 0, 0, 0), 0, 0));
 
         JLabel lProducts = new JLabel("Goods:");
-        modelCBG = new DefaultComboBoxModel(shop.getGoodsItem(categorySelec));
+        modelCBG = new DefaultComboBoxModel(shop.getGoodsItem(categorySelecRefer,subcategorySelecRefer));
         comboG = new JComboBox(modelCBG);
         comboG.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
         comboG.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JComboBox cb = (JComboBox) e.getSource();
-                Item item = (Item) cb.getSelectedItem();
-                if (item != null) {
-                    goodsSelectRefer = (Goods) item.getObj();
+                if (modelCBG != null && modelCBG.getSize() > 0) {
+                    JComboBox cb = (JComboBox) e.getSource();
+                    Item item = (Item) cb.getSelectedItem();
+                    if (item != null) {
+                        goodsSelectRefer = (Goods) item.getObj();
+                    } else {
+                        goodsSelectRefer = null;
+                    }
                 }
             }
         });
         if (modelCBG.getSize() > 0) {
+            goodsSelectRefer = (Goods)modelCBG.getElementAt(0).getObj();
             comboG.setSelectedIndex(0);
         }
         add(lProducts, new GridBagConstraints(3, 0, 1, 1, 0, 0,
@@ -144,7 +150,8 @@ public class SellingPanel  extends JPanel {
                 new Insets(0, 0, 0, 0), 0, 0));
 
         JLabel lCount = new JLabel("Count of birds");
-        JSpinner spinner = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
+        spinnerNumberModel = new SpinnerNumberModel(0, 0, 100, 1);
+        JSpinner spinner = new JSpinner(spinnerNumberModel);
         spinner.setMaximumSize(new Dimension(100, 20));
         add(lCount, new GridBagConstraints(0, 2, 1, 1, 0, 0,
                 GridBagConstraints.LINE_START, 0,
@@ -172,8 +179,18 @@ public class SellingPanel  extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(numberGoods <= 0) {
-                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set non-zero number of goods");
+                if(categorySelecRefer == null) {
+                    JOptionPane.showMessageDialog((JFrame) shopUI.getFrame(),
+                            "You mus select category");
+                } else if(subcategorySelecRefer == null) {
+                    JOptionPane.showMessageDialog((JFrame) shopUI.getFrame(),
+                            "You mus select subcategory");
+                } else if(goodsSelectRefer == null) {
+                    JOptionPane.showMessageDialog((JFrame) shopUI.getFrame(),
+                            "You mus select domain");
+                } else if(numberGoods <= 0) {
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(),
+                            "You mus set non-zero number of domain");
                 } else {
                     shop.buyGoods(clientSelectRefer, goodsSelectRefer, numberGoods);
                     shopUI.showData();
@@ -185,10 +202,12 @@ public class SellingPanel  extends JPanel {
     }
 
     public void updateSellingForm() {
+        System.out.println("updateSellingForm");
         updateComboBoxClient();
         updateComboBoxCateg();
         updateComboBoxSubcateg();
         updateComboBoxGoods();
+        spinnerNumberModel.setValue(0);
     }
 
     private void updateComboBoxClient() {
@@ -206,37 +225,54 @@ public class SellingPanel  extends JPanel {
     private void updateComboBoxCateg() {
         if(modelComboBoxCateg != null) {
             modelComboBoxCateg.removeAllElements();
-            for (String str : shop.getCategoriesFromGoods()) {
-                modelComboBoxCateg.addElement(str);
+            for (Item item : shop.getCategoriesItem()) {
+                modelComboBoxCateg.addElement(item);
             }
             if (modelComboBoxCateg.getSize() > 0) {
-                categorySelec = modelComboBoxCateg.getElementAt(0);
+                categorySelecRefer =(Category)modelComboBoxCateg.getElementAt(0).getObj();
             }
         }
     }
 
     private void updateComboBoxSubcateg() {
-        if(modelCBSubCateg != null) {
-            modelCBSubCateg.removeAllElements();
-            for (String str : shop.getSubCategoriesFromGoods(categorySelec)) {
-                modelCBSubCateg.addElement(str);
-            }
-            if (modelCBSubCateg.getSize() > 0) {
-                subcategorySelec = modelCBSubCateg.getElementAt(0);
-            }
+         updateModelSubcateg();
+        if (modelCBSubCateg != null && modelCBSubCateg.getSize() > 0) {
+            subcategorySelecRefer = (Subcategory) modelCBSubCateg.getElementAt(0).getObj();
         }
     }
 
     private void updateComboBoxGoods() {
-        if (modelCBG != null) {
-            modelCBG.removeAllElements();
-            for (Item item : shop.getGoodsItem(categorySelec
-                    , subcategorySelec)) {
-                modelCBG.addElement(item);
-            }
-            if (modelCBG.getSize() > 0) {
-                comboG.setSelectedIndex(0);
+        updateModelGoods();
+        if (modelCBG != null && modelCBG.getSize() > 0) {
+            comboG.setSelectedIndex(0);
+        }
+    }
+
+    private void updateModelSubcateg() {
+        subcategorySelecRefer = null;
+        if (modelCBSubCateg != null) {
+            modelCBSubCateg.removeAllElements();
+            Vector<Item> vector = shop.getSubcategoriesItem(categorySelecRefer);
+            if (vector != null) {
+                for (Item it : vector) {
+                    modelCBSubCateg.addElement(it);
+                }
             }
         }
     }
+
+    private void updateModelGoods() {
+        goodsSelectRefer = null;
+        if (modelCBG != null) {
+            modelCBG.removeAllElements();
+            Vector<Item> vector = shop.getGoodsItem(categorySelecRefer
+                    , subcategorySelecRefer);
+            if(vector != null) {
+                for (Item it : vector) {
+                    modelCBG.addElement(it);
+                }
+            }
+        }
+    }
+
 }

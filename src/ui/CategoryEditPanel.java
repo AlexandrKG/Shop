@@ -1,7 +1,7 @@
 package ui;
 
 
-import goods.Category;
+import domain.Category;
 import shop.Shop;
 
 import javax.swing.*;

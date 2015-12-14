@@ -1,7 +1,6 @@
 package ui;
 
 import shop.Shop;
-import shop.ShopLocal;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

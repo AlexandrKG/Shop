@@ -1,13 +1,13 @@
 package db;
 
 
-import goods.Category;
-import goods.Goods;
+import domain.Category;
+import domain.Goods;
+import domain.Subcategory;
 import reports.SaleRecord;
-import shop.Client;
+import domain.Client;
 import shop.ShopDB;
 import utl.DataUtl;
-import utl.Entry;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -57,9 +57,9 @@ public class LoaderData {
             resultSet = statement.executeQuery("SELECT * FROM subcategory " +
                     "WHERE idcategory = " +
                     String.valueOf(shopDB.getCategories().get(i).getId()));
-            Entry temp;
+            Subcategory temp;
             while (resultSet.next()) {
-                temp = new Entry();
+                temp = new Subcategory();
                 temp.setId(resultSet.getInt("id"));
                 temp.setName(resultSet.getString("name"));
                 shopDB.getCategories().get(i).addSubcategory(temp);
@@ -76,32 +76,21 @@ public class LoaderData {
                 " FROM goods INNER JOIN shop " +
                 "ON id = idgoods");
         Goods g;
+        Category c;
+        Subcategory sc;
         while (resultSet.next()) {
             g = new Goods();
             g.setIdGoods(resultSet.getInt("id"));
-            g.setIdCategory(resultSet.getInt("idcategory"));
-            g.setIdSubcategory(resultSet.getInt("idsubcategory"));
             g.setName(resultSet.getString("name"));
             g.setNumber(resultSet.getInt("number"));
             g.setPrice(resultSet.getInt("price"));
+            c = shopDB.getCategory(resultSet.getInt("idcategory"));
+            sc = shopDB.getSubcategory(c, resultSet.getInt("idsubcategory"));
+            g.setCategory(c);
+            g.setSubcategory(sc);
             shopDB.getStore().add(g);
         }
         statement.close();
-
-        for(Goods goods : shopDB.getStore()) {
-            for(Category category : shopDB.getCategories()) {
-                if(category.getId() == goods.getIdCategory()) {
-                    goods.setCategory(category.getName());
-                    for(Entry e : category.getSubcategories()) {
-                        if(e.getId() == goods.getIdSubcategory()) {
-                            goods.setSubcategory(e.getName());
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
 
     }
 

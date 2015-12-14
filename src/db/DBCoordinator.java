@@ -1,10 +1,10 @@
 package db;
 
-import goods.Category;
-import goods.Goods;
+import domain.Category;
+import domain.Goods;
 import reports.SaleRecord;
-import shop.Client;
-import utl.Entry;
+import domain.Client;
+import domain.Entry;
 
 public interface DBCoordinator {
 

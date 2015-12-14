@@ -1,9 +1,9 @@
 package ui;
 
 
-import goods.Category;
+import domain.Category;
 import shop.Shop;
-import utl.Entry;
+import domain.Entry;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -81,7 +81,7 @@ public class SubcategoryEditPanel  extends JPanel {
     private Object[][] setDataTable() {
 
         Object[][] dataTable = null;
-        Category c = shop.findCategory(categorySelec);
+        Category c = shop.findCategoryName(categorySelec);
         if(c != null) {
             dataTable = new Object[c.getSubcategories().size()][];
             int i = 0;

@@ -1,7 +1,9 @@
 package ui;
 
 
-import goods.Goods;
+import domain.Category;
+import domain.Goods;
+import domain.Subcategory;
 import shop.Shop;
 
 import javax.swing.*;
@@ -142,20 +144,26 @@ public class GoodsAddPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String goodsName = lGoods.getText();
                 if(goodsName.isEmpty()) {
-                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set goods");
+                    JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus set domain");
                 } else if(categorySelec == null){
                     JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus select category");
                 } else if(subCategorySelec == null){
                     JOptionPane.showMessageDialog((JFrame)shopUI.getFrame(), "You mus select subcategory");
                 } else {
-                    Goods g = new Goods();
-                    g.setName(lGoods.getText());
-                    g.setCategory(categorySelec);
-                    g.setSubcategory(subCategorySelec);
-                    g.setNumber(numberGoods);
-                    g.setPrice(costGoods);
-                    shop.addGoods(g);
-                    shopUI.showGoodsForm();
+                    Category c = shop.findCategoryName(categorySelec);
+                    if (c != null) {
+                        Subcategory sc = c.getSubcategory(subCategorySelec);
+                        if (sc != null) {
+                            Goods g = new Goods();
+                            g.setName(lGoods.getText());
+                            g.setCategory(c);
+                            g.setSubcategory(sc);
+                            g.setNumber(numberGoods);
+                            g.setPrice(costGoods);
+                            shop.addGoods(g);
+                            shopUI.showGoodsForm();
+                        }
+                    }
                 }
                 spCost.setValue(0.0);
                 spinner.setValue(0);

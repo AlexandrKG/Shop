@@ -2,12 +2,10 @@ package shop;
 
 
 import db.*;
-import goods.Category;
-import goods.Goods;
+import domain.*;
 import reports.AccountBook;
 import reports.SaleRecord;
 import ui.Item;
-import utl.Entry;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -15,21 +13,21 @@ import java.util.*;
 
 public class ShopDB implements Shop{
 
-    private static final String flagDB = "Derby"; // "MySQL" or "Derby"
     private ArrayList<Goods> store;
     private AccountBook accountBook;
     private ArrayList<Client> clients;
     private  ArrayList<Category> categories;
-    private Queries queriesToDB;
+    private DBManager queriesToDB;
+    private LoaderData loaderData;
 
-    public ShopDB() {
+    public ShopDB(DBManager managerDB) {
         store = new ArrayList<>();
         accountBook = new AccountBook();
         clients = new ArrayList<>();
         categories = new ArrayList<>();
-        queriesToDB = new Queries(this);
+        queriesToDB = managerDB;
 
-        initShop(false);
+        initShop();
     }
 
     public ArrayList<Goods> getStore() {
@@ -48,23 +46,21 @@ public class ShopDB implements Shop{
         return categories;
     }
 
-    public String getFlagDB() {
-        return flagDB;
-    }
-
-    public Queries getQueriesToDB() {
+    public DBManager getQueriesToDB() {
         return queriesToDB;
     }
 
     @Override
-    public void initShop(boolean resetData) {
-        queriesToDB.initData(resetData);
+    public void initShop() {
+        queriesToDB.initData();
+        loaderData = new LoaderData(this);
+        loaderData.initDataFromBD();
     }
 
     @Override
     public void addCategory(String data) {
         if(categories != null) {
-            if(existCategory(data)) {
+            if(existCategoryName(data)) {
                 return;
             }
         }
@@ -73,15 +69,16 @@ public class ShopDB implements Shop{
         categories.add(category);
     }
 
-    private boolean existCategory(String data) {
-        if(findCategory(data) != null) {
+    @Override
+    public boolean existCategoryName(String data) {
+        if(findCategoryName(data) != null) {
             return true;
         }
         return false;
     }
 
     @Override
-    public Category findCategory(String data) {
+    public Category findCategoryName(String data) {
         Category result = null;
         if(categories != null) {
             for (Category c : categories) {
@@ -95,8 +92,22 @@ public class ShopDB implements Shop{
     }
 
     @Override
+    public Category getCategory(Category category) {
+        Category result = null;
+        if(categories != null) {
+            for (Category c : categories) {
+                if (c == category) {
+                    result = c;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    @Override
     public void addSubcategory(String categoryName, String subcategory) {
-        Category category = findCategory(categoryName);
+        Category category = findCategoryName(categoryName);
         if(category != null) {
             category.addSubcategory(subcategory);
             Entry e = category.getSubcategory(subcategory);
@@ -108,16 +119,8 @@ public class ShopDB implements Shop{
 
     @Override
     public void addGoods(Goods goods) {
-        Category categ = findCategory(goods.getCategory());
-        if(categ != null) {
-            goods.setIdCategory(categ.getId());
-            Entry subcateg = categ.getSubcategory(goods.getSubcategory());
-            if(subcateg != null) {
-                goods.setIdSubcategory(subcateg.getId());
-                queriesToDB.addNewGoods(goods);
-                store.add(goods);
-            }
-        }
+        queriesToDB.addNewGoods(goods);
+        store.add(goods);
     }
 
     @Override
@@ -129,8 +132,6 @@ public class ShopDB implements Shop{
                 Constructor constr = goods.getClass().getConstructor();
                 Goods g = (Goods) constr.newInstance();
                 g.setName(goods.getName());
-                g.setIdCategory(goods.getIdCategory());
-                g.setIdSubcategory(goods.getIdSubcategory());
                 g.setIdGoods(goods.getIdGoods());
                 g.setCategory(goods.getCategory());
                 g.setSubcategory(goods.getSubcategory());
@@ -209,6 +210,17 @@ public class ShopDB implements Shop{
     }
 
     @Override
+    public Vector<Item> getGoodsItem(Category category,Subcategory subcategory) {
+        Vector<Item> result = new Vector<>();
+        for(Goods g  : store) {
+            if(g.getCategory() == category && g.getSubcategory() == subcategory) {
+                result.add(new Item(g, g.getName()));
+            }
+        }
+        return result;
+    }
+
+    @Override
     public Vector<String> getCategoriesVector() {
         Vector<String> result = new Vector<>();
         for (Category c : getCategories()) {
@@ -217,10 +229,18 @@ public class ShopDB implements Shop{
         return result;
     }
 
+    public Vector<Item> getCategoriesItem() {
+        Vector<Item> result = new Vector<>();
+        for(Category c : getCategories()) {
+            result.add(new Item(c, c.getName()));
+        }
+        return result;
+    }
+
     @Override
     public Vector<String> getSubcategoriesVector(String category) {
         Vector<String> result = new Vector<>();
-        Category c = findCategory(category);
+        Category c = findCategoryName(category);
         if(c != null) {
             for (Entry e : c.getSubcategories()) {
                 if (e != null) {
@@ -231,12 +251,22 @@ public class ShopDB implements Shop{
         return result;
     }
 
+    public Vector<Item> getSubcategoriesItem(Category category) {
+        Vector<Item> result = new Vector<>();
+        if(category != null) {
+            for (Subcategory sc : category.getSubcategories()) {
+                result.add(new Item(sc, sc.getName()));
+            }
+        }
+        return result;
+    }
+
     @Override
     public Vector<String> getCategoriesFromGoods() {
         Vector<String> result = new Vector<>();
         TreeSet<String> temp = new TreeSet<>();
         for(Goods g : store) {
-            temp.add(g.getCategory());
+            temp.add(g.getCategory().getName());
         }
         for(String str : temp) {
             result.add(str);
@@ -249,8 +279,8 @@ public class ShopDB implements Shop{
         Vector<String> result = new Vector<>();
         TreeSet<String> temp = new TreeSet<>();
         for(Goods g : store) {
-            if(g.getCategory().equals(category)) {
-                temp.add(g.getSubcategory());
+            if(g.getCategory().getName().equals(category)) {
+                temp.add(g.getSubcategory().getName());
             }
         }
         for(String str : temp) {
@@ -282,4 +312,26 @@ public class ShopDB implements Shop{
         clients.add(client);
     }
 
+    @Override
+    public Category getCategory(long categoryID) {
+        Category result = null;
+        if(categories != null) {
+            for (Category c : categories) {
+                if (c.getId() == categoryID) {
+                    result = c;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public Subcategory getSubcategory(Category category, long subcategoryID) {
+        Subcategory result = null;
+        if(category != null) {
+            result = category.getSubcategory(subcategoryID);
+        }
+        return result;
+    }
 }
