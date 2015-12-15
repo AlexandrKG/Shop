@@ -21,6 +21,7 @@ public class ShopDBTests {
     public void init() {
         manager = new ManagerDerby();
         shopDB = new ShopDB(manager);
+        shopDB.initShop();
     }
 
     @Test
@@ -67,9 +68,15 @@ public class ShopDBTests {
         Assert.assertTrue(fl_subcateg);
     }
 
+    @Test
     public void testaddGoods() {
         Goods goods = new Goods();
+        Category categ = new Category("Category1000");
+        Subcategory sc = new Subcategory();
         goods.setName("Goods100");
+        goods.setIdGoods(100);
+        goods.setSubcategory(sc);
+        goods.setCategory(categ);
         shopDB.addGoods(goods);
         boolean fl_goods = false;
         for(Goods g : shopDB.getStore()) {
@@ -81,7 +88,8 @@ public class ShopDBTests {
         Assert.assertTrue(fl_goods);
     }
 
-    public void testaddClient() {
+    @Test
+    public void testAddClient() {
         Client client = new Client();
         client.setName("Client1");
         shopDB.addNewClient(client);

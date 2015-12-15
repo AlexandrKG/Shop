@@ -27,7 +27,7 @@ public class ShopDB implements Shop{
         categories = new ArrayList<>();
         queriesToDB = managerDB;
 
-        initShop();
+//        initShop();
     }
 
     public ArrayList<Goods> getStore() {

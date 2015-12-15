@@ -25,6 +25,7 @@ public class LauncherShop {
 		}
 
 		Shop shop = new ShopDB(managerDB);
+		shop.initShop();
 		ShopUI shopUI = new ShopSwingUI(shop);
 	}
 
